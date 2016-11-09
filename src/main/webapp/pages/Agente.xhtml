@@ -35,7 +35,7 @@
 
 			<f:facet name="footer">
 				<p:commandButton value="Voltar" outcome="/index.xhtml" />
-				<p:commandButton icon="ui-icon-newwin" value="Novo" type="button" onclick="PF('dlgAgenteNovo').show();"/>
+				<p:commandButton icon="ui-icon-newwin" value="Novo" type="button" onclick="PF('dlgAgenteNovo').show();" update=":frmAgenteNovo"/>
 			</f:facet>
 		</p:dataTable>
 	</h:form>
@@ -62,7 +62,7 @@
 
 			</h:panelGrid>
 			<h:panelGrid columns="2">
-				<p:commandButton value="Salvar" action="#{agenteMB.passar()}" update=":frmAgente :frmAgenteNovo"/>
+				<p:commandButton value="Salvar" action="#{agenteMB.passar()}" onsuccess="" update=":frmAgente :frmAgenteNovo"/>
 				<p:commandButton value="Cancelar" onclick="PF('dlgAgenteNovo').hide();" update=":frmAgente"/>
 			</h:panelGrid>
 		</h:form>
@@ -90,7 +90,7 @@
 
 			</h:panelGrid>
 			<h:panelGrid columns="2">
-				<p:commandButton value="Salvar" update=":frmAgente"/>
+				<p:commandButton value="Atualizar" update=":frmAgente"/>
 				<p:commandButton value="Cancelar" onclick="PF('dlgAgenteAtualizar').hide();" />
 			</h:panelGrid>
 		</h:form>
@@ -118,7 +118,7 @@
 
 			</h:panelGrid>
 			<h:panelGrid columns="2">
-				<p:commandButton value="Salvar" update=":frmAgente"/>
+				<p:commandButton value="Excluir" update=":frmAgente"/>
 				<p:commandButton value="Cancelar" onclick="PF('dlgAgenteExcluir').hide();" />
 			</h:panelGrid>
 		</h:form>

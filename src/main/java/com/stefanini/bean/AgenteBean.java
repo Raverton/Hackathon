@@ -43,6 +43,8 @@ public class AgenteBean {
 	{
 		return agenteService.listarAgente();
 	} 
+	
+	
 }
 
 

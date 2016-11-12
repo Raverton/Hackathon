@@ -17,13 +17,22 @@ public class InfracoesService {
 	private InfracoesRepository infracoesRepository;
 	
 	
-	public void incluir(Infracoes infracoes) {
-		infracoesRepository.incluirInfracoes(infracoes);
+	public void salvar(Infracoes infracoes) {
+		infracoesRepository.salvar(infracoes);
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public List<Infracoes> listarInfracoes() {
 		return infracoesRepository.lista();
+	}
+
+	
+	public void excluir(Integer id) {
+		infracoesRepository.Excluir(id);
+	}
+	
+	public void buscarInfracao(Integer id){
+		infracoesRepository.busca(id);
 	}
 	
 }

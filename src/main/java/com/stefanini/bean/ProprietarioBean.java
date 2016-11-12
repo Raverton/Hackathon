@@ -13,6 +13,7 @@ import com.stefanini.model.Proprietario;
 import com.stefanini.model.Telefones;
 import com.stefanini.model.Tipotelefone;
 import com.stefanini.service.ProprietarioService;
+import com.stefanini.service.TelefoneService;
 
 @SessionScoped
 @ManagedBean(name = "proprietarioMB")
@@ -20,6 +21,8 @@ public class ProprietarioBean implements Serializable {
 
 	@Inject
 	private ProprietarioService proprietarioservice;
+	@Inject
+	private TelefoneService telefoneService;
 	@Inject
 	private Agente agente;
 	@Inject
@@ -32,19 +35,13 @@ public class ProprietarioBean implements Serializable {
 
 	private Estados estados;
 
-	public List<Tipotelefone> listartipos() {
-		return proprietarioservice.buscarTelefones();
+	public List<Telefones> listartipos() {
+		return telefoneService.listarProprietario();
 	}
 
 	public Estados[] getStatuses() {
 		return Estados.values();
 	}
-
-	public void salvar() {
-      		
-		proprietarioservice.cadastraTipo(tpelefone);
-	}
-
 
 	public Agente getAgente() {
 		return agente;
@@ -81,9 +78,9 @@ public class ProprietarioBean implements Serializable {
 		this.tpelefone = tpelefone;
 	}
 
-	public List<Proprietario> ListarProprietario()
+	/*public List<Proprietario> ListarProprietario()
 	{
 		return proprietarioservice.listarProprietario();
-	} 
+	} */
 	
 }

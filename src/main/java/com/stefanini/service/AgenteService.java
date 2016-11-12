@@ -16,13 +16,26 @@ public class AgenteService {
 	@Inject
 	private AgenteRepository agenteRepository;
 
-	public void incluir(Agente agente) {
-		agenteRepository.incluirAgente(agente);
+	
+	public void salva(Agente agente) {
+		agenteRepository.salva(agente);
+	}
+	
+	public Agente buscarAgente(Integer id){
+		return agenteRepository.busca(id);
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public List<Agente> listarAgente() {
-		return agenteRepository.lista();
+	List<Agente> lista = agenteRepository.lista();
+	return lista;
 	}
+	
+	public void excluir(Integer i){
+		agenteRepository.Excluir(i);
+	}
+	
+	
+	
 
 }

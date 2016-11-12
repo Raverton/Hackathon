@@ -19,12 +19,8 @@
 	<p:dataTable style="width: 1000px; margin: 0 auto;" var="agente"
 		value="#{agenteMB.ListarAgentes()}">
 		
-		<p:column headerText="Id" filterBy="#{agente.idAgente}">
-			<h:outputText value="#{agente.idAgente}" />
-		</p:column>
-
 		<p:column headerText="Nome" filterBy="#{agente.nome}">
-			<h:outputText value="#{agente.nome}" />
+			<h:outputText value="#{agente.toString}" />
 		</p:column>
         
         

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<style type="text/css">
+.ui-widget {
+	font-size: 13px !important;
+}
+</style>
+</h:head>
+<h:body style="background-color: #F5F6CE">
+	<h:form id="frmInfracoes">
+		<p:dataTable style="width: 1000px; margin: 0 auto;" var="infracoes"
+			value="#{infracoesMB.Listar()}">
+
+			<p:column headerText="Numero da Infração" filterBy="#{infracoes.idInfracao}" columns="5">
+				<p:outputLabel value="id" />
+				<h:outputText size="20" required="true"
+					value="#{infracoes.idInfracao}" />
+			<p:column headerText="Nome do Agente">
+				<h:outputText value="#{infracoes.agente.nome}" />
+			</p:column>
+			<p:column headerText="Placa do veiculo"  width="10"  height="4">
+				<h:outputText value="#{infracoes.placaVeic.placa}" />
+			</p:column>
+			<p:column headerText="Tipo de Infração"  width="20"  height="4">
+				<h:outputText value="#{infracoes.tipoInfracao.descricaoTipoInfracao}" />
+			</p:column>
+			<p:column headerText="Opções">
+				<p:spacer width="15" height="4" />
+				<p:commandButton icon="ui-icon-trash" onclick="PF('dlgInfracoesExcluir').show();" update=":frmInfracoesExcluir"/>
+				<p:spacer width="10" height="4" />
+				<p:commandButton icon="ui-icon-pencil" onclick="PF('dlgInfracoesAtualizar').show();" update=":frmInfracoesAtualizar"/>
+			</p:column>
+          </p:column>
+			<f:facet name="footer">
+				<p:commandButton value="Voltar" outcome="/index.xhtml" />
+				<p:commandButton icon="ui-icon-newwin" value="Novo" type="button" onclick="PF('dlgInfracoesNovo').show();" update=":frmInfracoesNovo"/>
+			</f:facet>
+		</p:dataTable>
+	</h:form>
+
+<p:dialog widgetVar="dlgInfracoesNovo" closable="false" draggable="true"
+		resizable="false" responsive="true" header="Cadastrar Nova Infração"
+		modal="true" appendTo="@(body)">
+		<h:form id="frmInfracoesNovo">
+
+			<h:panelGrid id="pnlInfracoesNovo" columns="2" >
+
+    <p:dataTable style="width: 1000px; margin: 0 auto;" var="agente"
+			value="#{agenteMBMB.Listar()}">
+				<p:column headerText="Agente" filterBy="#{agente.id}" columns="5">
+				<p:outputLabel value="id" />
+				<h:outputText size="20" required="true"
+					value="#{infracoes.idInfracao}" />
+        </p:column>
+        </p:dataTable>
+
+			</h:panelGrid>
+			<h:panelGrid columns="2">
+				<p:commandButton value="Salvar" action="#{infracoesMB.passar()}" onsuccess="" update=":frmInfracoes :frmInfracoesNovo"/>
+				<p:commandButton value="Cancelar" onclick="PF('dlgInfracoesNovo').hide();" update=":frmInfracoes"/>
+			</h:panelGrid>
+		</h:form>
+	</p:dialog>
+	
+	
+	<p:dialog widgetVar="dlgInfracoesAtualizar" closable="false" draggable="true"
+		resizable="false" responsive="true" header="Cadastrar Nova Infração"
+		modal="true" appendTo="@(body)">
+		<h:form id="frmInfracoesAtualizar">
+
+			<h:panelGrid id="pnlInfracoesAtualizar" columns="2">
+
+				<p:outputLabel value="Nome" />
+				<p:inputText size="20" required="true"
+					value="#{infracoesMB.infracoes.agente.nome}" />
+
+			</h:panelGrid>
+			<h:panelGrid columns="2">
+				<p:commandButton value="Atualizar" update=":frmInfracoes"/>
+				<p:commandButton value="Cancelar" onclick="PF('dlgInfracoesAtualizar').hide();" />
+			</h:panelGrid>
+		</h:form>
+	</p:dialog>
+	
+	
+	<p:dialog widgetVar="dlgInfracoesExcluir" closable="false" draggable="true"
+		resizable="false" responsive="true" header="Excluir Infração"
+		modal="true" appendTo="@(body)">
+		<h:form id="frmInfracoesExcluir">
+<h:panelGrid>
+						<h:outputText value="Confirma exclusão da infração?" />
+			</h:panelGrid>
+			<h:panelGrid columns="2">
+				<p:commandButton value="Sim" update=":frmInfracoes"/>
+				<p:commandButton value="Não" onclick="PF('dlgInfracoesExcluir').hide();" />
+			</h:panelGrid>
+		</h:form>
+	</p:dialog>
+</h:body>
+</html>

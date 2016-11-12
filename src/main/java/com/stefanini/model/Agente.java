@@ -5,11 +5,17 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -34,10 +40,13 @@ public class Agente implements  Serializable {
 	
 	@Temporal(TemporalType.DATE)
 	@Column(name = "dtContratacao", length = 10)
-	
 	private Date dtContratacao;
+	
+	@OneToMany(mappedBy="agente", fetch=FetchType.EAGER)
+	private List<Infracoes> infracoes;
+	
 	private Integer tempoServico;
-
+	
 	public Agente() {
 	}
 
@@ -48,9 +57,8 @@ public class Agente implements  Serializable {
 		this.tempoServico = tempoServico;
 	}
 
-
 	public Integer getIdAgente() {
-		return this.idAgente;
+		return idAgente;
 	}
 
 	public void setIdAgente(Integer idAgente) {
@@ -58,7 +66,7 @@ public class Agente implements  Serializable {
 	}
 
 	public String getNome() {
-		return this.nome;
+		return nome;
 	}
 
 	public void setNome(String nome) {
@@ -66,20 +74,34 @@ public class Agente implements  Serializable {
 	}
 
 	public Date getDtContratacao() {
-		//System.out.println("data +"+dtContratacao);
-		return this.dtContratacao;
+		return dtContratacao;
 	}
 
 	public void setDtContratacao(Date dtContratacao) {
 		this.dtContratacao = dtContratacao;
 	}
 
+	public List<Infracoes> getInfracoes() {
+		return infracoes;
+	}
+
+	public void setInfracoes(List<Infracoes> infracoes) {
+		this.infracoes = infracoes;
+	}
+
 	public Integer getTempoServico() {
-		return this.tempoServico;
+		return tempoServico;
 	}
 
 	public void setTempoServico(Integer tempoServico) {
 		this.tempoServico = tempoServico;
 	}
+
+
+@Override
+public String toString() {
+	
+	return getNome()+" Data de Contratação "+getDtContratacao().toString()+" Tempo de servico " + getTempoServico().toString();
+}
 
 }
